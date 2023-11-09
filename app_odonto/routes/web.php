@@ -1,8 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AdministrativoController;
+use App\Http\Controllers\PacienteController;
+use App\Http\Controllers\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,3 +30,10 @@ Route::post('/administrativo/dashboard/cadastrar/armazenar', [AdministrativoCont
 Route::get('/administrativo/dashboard/excluir/{id}', [AdministrativoController::class, 'excluir'])->name('admin.excluir');
 Route::get('/administrativo/dashboard/editar/{id}', [AdministrativoController::class, 'editar'])->name('admin.editar');
 Route::post('/administrativo/dashboard/editar/atualizar/{id}', [AdministrativoController::class, 'atualizar'])->name('admin.atualizar');
+
+Route::get('/administrativo/paciente', [PacienteController::class, 'inicio'])->name('paciente.inicio');
+Route::get('/administrativo/paciente/cadastrar', [PacienteController::class, 'cadastrar'])->name('paciente.cadastrar');
+Route::post('/administrativo/paciente/cadastrar/armazenar', [PacienteController::class, 'armazenar'])->name('paciente.armazenar');
+Route::get('/administrativo/paciente/excluir/{id}', [PacienteController::class, 'excluir'])->name('paciente.excluir');
+Route::get('/administrativo/paciente/editar/{id}', [PacienteController::class, 'editar'])->name('paciente.editar');
+Route::post('/administrativo/paciente/editar/atualizar/{id}', [PacienteController::class, 'atualizar'])->name('paciente.atualizar');

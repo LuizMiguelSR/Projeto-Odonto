@@ -17,7 +17,6 @@ class AdministrativoController extends Controller
     {
         try {
             $usuarios = User::all();
-
             return view('admin.dashboard', compact('usuarios'));
         } catch (\Throwable $th) {
             dd($th);
@@ -57,7 +56,7 @@ class AdministrativoController extends Controller
             $usuario->role = $request->input('role');
             $usuario->save();
 
-            return redirect()->route('admin.dashboard')->with('sucess', 'Cadastrado realizado com sucesso');
+            return redirect()->route('admin.dashboard')->with('sucess', 'Usuário cadastrado com sucesso');
         } catch (\Throwable $th) {
             dd($th);
         }
@@ -68,7 +67,7 @@ class AdministrativoController extends Controller
         try {
             $usuario = User::find($id);
             $usuario->delete();
-            return redirect()->route('admin.dashboard')->with('sucess', 'Usuário excluído com sucesso');
+            return redirect()->route('admin.dashboard')->with('sucess', 'Usuário removido com sucesso');
         } catch (\Throwable $th) {
             dd($th);
         }
