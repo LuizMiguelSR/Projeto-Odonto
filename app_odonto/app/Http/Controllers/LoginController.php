@@ -17,31 +17,35 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        $regras = [
-            'email' => 'email',
-            'password' => 'required|min:4',
-        ];
+        try {
+            $regras = [
+                'email' => 'email',
+                'password' => 'required|min:4',
+            ];
 
-        $feedback = [
-            'required' => 'O campo :attribute deve ser preenchido',
-            'password.required' => 'A senha é obrigatória.',
-            'password.min' => 'A senha deve ter pelo menos :min caracteres.',
-        ];
+            $feedback = [
+                'required' => 'O campo :attribute deve ser preenchido',
+                'password.required' => 'A senha é obrigatória.',
+                'password.min' => 'A senha deve ter pelo menos :min caracteres.',
+            ];
 
-        $request->validate($regras, $feedback);
+            $request->validate($regras, $feedback);
 
-        $credenciais = $request->only('email', 'password');
+            $credenciais = $request->only('email', 'password');
 
-        if (Auth::attempt($credenciais)) {
-            $request->session()->regenerate();
+            if (Auth::attempt($credenciais)) {
+                $request->session()->regenerate();
 
-            return redirect()->intended('administrativo/dashboard');
+                return redirect()->intended('administrativo/dashboard');
 
+            }
+
+            return back()->withErrors([
+                'email' => 'E-mail ou senha incorretos.',
+            ])->onlyInput('email');
+        } catch (\Throwable $th) {
+            return back();
         }
-        
-        return back()->withErrors([
-            'email' => 'E-mail ou senha incorretos.',
-        ])->onlyInput('email');
     }
 
     public function logout(Request $request)
