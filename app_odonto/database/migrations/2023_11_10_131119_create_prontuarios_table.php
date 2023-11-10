@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pacientes', function (Blueprint $table) {
+        Schema::create('prontuarios', function (Blueprint $table) {
             $table->id();
-            $table->string('nome')->unique();
-            $table->string('email')->unique();
-            $table->string('telefone', 15);
-            $table->string('cpf', 14)->unique();
+            $table->unsignedBigInteger('paciente_id');
+            $table->foreign('paciente_id')->references('id')->on('pacientes')->onDelete('cascade');
+            $table->string('caminho_arquivo');
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pacientes');
+        Schema::dropIfExists('prontuarios');
     }
 };

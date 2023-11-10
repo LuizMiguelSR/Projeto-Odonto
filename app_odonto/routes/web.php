@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdministrativoController;
+use App\Http\Controllers\ProntuarioController;
 use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\LoginController;
 
@@ -37,3 +38,7 @@ Route::post('/administrativo/paciente/cadastrar/armazenar', [PacienteController:
 Route::get('/administrativo/paciente/excluir/{id}', [PacienteController::class, 'excluir'])->name('paciente.excluir');
 Route::get('/administrativo/paciente/editar/{id}', [PacienteController::class, 'editar'])->name('paciente.editar');
 Route::post('/administrativo/paciente/editar/atualizar/{id}', [PacienteController::class, 'atualizar'])->name('paciente.atualizar');
+
+Route::get('/administrativo/prontuario', [ProntuarioController::class, 'inicio'])->name('prontuario.inicio');
+Route::get('/administrativo/prontuario/cadastrar', [ProntuarioController::class, 'cadastrar'])->name('prontuario.cadastrar');
+Route::post('/administrativo/prontuario/armazenar', [ProntuarioController::class, 'armazenar'])->name('prontuario.armazenar');

@@ -68,6 +68,53 @@
                             @endif
                         </small>
                     </a>
+                    <a href="{{ route('prontuario.inicio') }}" class="submenu-link link-light text-decoration-none rounded p-2 {{ request()->routeIs('prontuario.inicio') ? ' active' : '' }}">
+                        <small class="d-flex justify-content-between align-items-center">
+                            Prontuários
+
+                            @if (request()->routeIs('prontuario.inicio'))
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                                </svg>
+                            @endif
+                        </small>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="item">
+            <div class="w-100 d-flex align-items-center gap-2 link-light text-decoration-none mt-2 py-3 px-3 border-start border-light border-4" type="button" data-bs-toggle="collapse" data-bs-target="#menu-usuario" aria-expanded="true" aria-controls="menu-usuario">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
+                </svg>
+
+                Consultas
+            </div>
+
+            <div class="collapse show" id="menu-usuario">
+                <div class="bg-dark d-flex flex-column rounded mx-4 p-2 row-gap-1">
+                    <a href="{{ route('paciente.cadastrar') }}" class="submenu-link link-light text-decoration-none rounded p-2 {{ request()->routeIs('paciente.cadastrar') ? ' active' : '' }}">
+                        <small class="d-flex justify-content-between align-items-center">
+                            Cadastrar
+                            @if (request()->routeIs('paciente.cadastrar'))
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                                </svg>
+                            @endif
+                        </small>
+                    </a>
+                    <a href="{{ route('paciente.inicio') }}" class="submenu-link link-light text-decoration-none rounded p-2 {{ request()->routeIs('paciente.inicio') ? ' active' : '' }}">
+                        <small class="d-flex justify-content-between align-items-center">
+                            Listagem
+
+                            @if (request()->routeIs('paciente.inicio'))
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                                </svg>
+                            @endif
+                        </small>
+                    </a>
                 </div>
             </div>
         </div>
