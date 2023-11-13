@@ -16,8 +16,9 @@ class ProntuarioController extends Controller
     public function inicio()
     {
         try {
-            $prontuarios = Prontuario::all();
-            return view('admin.prontuario_inicio', compact('prontuarios'));
+            $paginator = Prontuario::paginate(8);
+            $prontuarios = $paginator;
+            return view('admin.prontuario_inicio', compact('prontuarios', 'paginator'));
         } catch (\Throwable $th) {
             dd($th);
         }
@@ -33,13 +34,12 @@ class ProntuarioController extends Controller
     {
 
         $request->validate([
-            'pdf_file' => 'required|mimes:pdf|max:5120', // Verifica se é um arquivo PDF e tamanho máximo de 2MB
+            'pdf_file' => 'required|mimes:pdf|max:5120',
         ]);
 
         $pdfFile = $request->file('pdf_file');
         $fileName = 'pdf_' . uniqid() . '.' . $pdfFile->getClientOriginalExtension();
-        $filePath = $pdfFile->storeAs('pdfs', $fileName, 'public'); // Salva o arquivo na pasta 'storage/app/public/pdfs'
-        // Salva o caminho do arquivo no banco de dados
+        $filePath = $pdfFile->storeAs('pdfs', $fileName, 'public');
         Prontuario::create([
             'paciente_id' => $request->id,
             'caminho_arquivo' => $filePath,

@@ -1,5 +1,5 @@
 @extends('admin.layouts.layoutDashboard')
-@section('titulo', 'Dashboard')
+@section('titulo', 'Pacientes')
 @section('conteudo')
     <div class="d-flex justify-content-between mb-4">
         @component('admin.layouts._components.alertaSucesso')
@@ -74,11 +74,46 @@
                         <td>{{ $paciente->telefone }}</td>
                         <td>
                             <div class="d-flex justify-content-center">
-                                <button type="button" class="btn btn-light d-flex justify-content-center align-items-center rounded-circle p-2 mx-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <button type="button" class="btn btn-light d-flex justify-content-center align-items-center rounded-circle p-2 mx-2" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $paciente->id }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                                         <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
                                     </svg>
                                 </button>
+
+                                <div class="modal fade" id="exampleModal{{ $paciente->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered text-light">
+                                        <div class="modal-content bg-custom">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Paciente</h1>
+                                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body d-flex flex-wrap row-gap-4">
+                                                <div class="col-6">
+                                                    <div><small>Nome:</small></div>
+                                                    <div>{{ $paciente->nome }}</div>
+                                                </div>
+
+                                                <div class="col-6">
+                                                    <div><small>E-mail:</small></div>
+                                                    <div>{{ $paciente->email }}</div>
+                                                </div>
+
+                                                <div class="col-6">
+                                                    <div><small>CPF:</small></div>
+                                                    <div>{{ $paciente->cpf }}</div>
+                                                </div>
+
+                                                <div class="col-6">
+                                                    <div><small>Telefone:</small></div>
+                                                    <div>{{ $paciente->telefone }}</div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <a href="{{ route('paciente.editar', $paciente->id ) }}" class="btn btn-light d-flex justify-content-center align-items-center rounded-circle p-2 mx-2" title="Editar">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
@@ -100,43 +135,6 @@
         </table>
     </div>
 
-    <nav aria-label="navigation">
-        <ul class="pagination justify-content-end pt-4 pb-2">
-            <li class="page-item"><a class="page-link bg-custom border-dark link-light" href="#">Anterior</a></li>
-            <li class="page-item"><a class="page-link bg-custom border-dark link-light" href="#">1</a></li>
-            <li class="page-item"><a class="page-link bg-custom border-dark link-light" href="#">2</a></li>
-            <li class="page-item"><a class="page-link bg-custom border-dark link-light" href="#">3</a></li>
-            <li class="page-item"><a class="page-link bg-custom border-dark link-light" href="#">Próximo</a></li>
-        </ul>
-    </nav>
+    {{ $paginator->links('admin.layouts._components.paginator') }}
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered text-light">
-            <div class="modal-content bg-custom">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Usuário</h1>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body d-flex flex-wrap row-gap-4">
-                    <div class="col-6">
-                        <div><small>Usuário:</small></div>
-                        <div>Admin</div>
-                    </div>
-
-                    <div class="col-6">
-                        <div><small>Status:</small></div>
-                        <div>Ativado</div>
-                    </div>
-
-                    <div class="col-12">
-                        <div><small>E-mail:</small></div>
-                        <div>admin@kbrtec.com.br</div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
-                </div>
-            </div>
-        </div>
-    </div>
 @endsection

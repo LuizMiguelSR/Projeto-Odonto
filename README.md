@@ -1,15 +1,19 @@
 # Projeto-Odonto
-Projeto de sistema de gerenciamento de consultas odontológicas
+
+Projeto de sistema de gerenciamento de consultas odontológicas, com CRUD de pacientes, consultas e prontuários. E envio de mensagens de aviso via WhatsApp.
 
 ## Instruções
 
 - 1º Realizar a instalação dos pacotes do composer
     
-    No Terminal
+  No Terminal
  
-        composer install --ignore-platform-req=ext-zip
+        composer install
 
 - 2º Criar o arquivo .env para determinar as variáveis de ambiente basta copiar o arquivo .env.example e apagar o .example
+  - Coloque os dados do banco de dados;
+  - Coloque o servidor smtp;
+  - Url e token da api do Meta;
 
 - 3º Gerar a chave de configuração da aplicação e preencher o arquivo .env com as configurações do mysql e do smtp de email
   
@@ -31,3 +35,4 @@ Projeto de sistema de gerenciamento de consultas odontológicas
 - 6º Realizar o link simbólico com o comando
 
         php artisan storage:link
+

@@ -13,11 +13,12 @@ class AdministrativoController extends Controller
         $this->middleware('auth');
     }
 
-    public function dashboard()
+    public function inicio()
     {
         try {
-            $usuarios = User::all();
-            return view('admin.dashboard', compact('usuarios'));
+            $paginator = User::paginate(8);
+            $usuarios = $paginator;
+            return view('admin.usuario_inicio', compact('usuarios', 'paginator'));
         } catch (\Throwable $th) {
             dd($th);
         }
@@ -25,7 +26,7 @@ class AdministrativoController extends Controller
 
     public function cadastrar()
     {
-        return view('admin.cadastro');
+        return view('admin.usuario_cadastrar');
     }
 
     public function armazenar(Request $request)
@@ -56,7 +57,7 @@ class AdministrativoController extends Controller
             $usuario->role = $request->input('role');
             $usuario->save();
 
-            return redirect()->route('admin.dashboard')->with('sucess', 'Usuário cadastrado com sucesso');
+            return redirect()->route('usuario.inicio')->with('sucess', 'Usuário cadastrado com sucesso');
         } catch (\Throwable $th) {
             dd($th);
         }
@@ -67,7 +68,7 @@ class AdministrativoController extends Controller
         try {
             $usuario = User::find($id);
             $usuario->delete();
-            return redirect()->route('admin.dashboard')->with('sucess', 'Usuário removido com sucesso');
+            return redirect()->route('usuario.inicio')->with('sucess', 'Usuário removido com sucesso');
         } catch (\Throwable $th) {
             dd($th);
         }
@@ -78,7 +79,7 @@ class AdministrativoController extends Controller
     {
         try {
             $usuario = User::find($id);
-            return view('admin.editar_usuario', compact('usuario'));
+            return view('admin.usuario_editar', compact('usuario'));
         } catch (\Throwable $th) {
             dd($th);
         }
@@ -86,17 +87,17 @@ class AdministrativoController extends Controller
 
     public function atualizar(Request $request, $id)
     {
-        try {
             $usuario = User::find($id);
 
             $regras = [
                 'name' => 'min:4|max:40',
+                'email' => 'unique:users',
                 'password' => 'nullable|min:4',
                 'role' => 'in:admin,user',
             ];
 
             $feedback = [
-                'required' => 'O campo :attribute deve ser preenchido',
+                'email.unique' => 'Este email já está em uso. Por favor, escolha outro.',
                 'name.min' => 'O campo nome deve ter no mínimo 4 caracteres',
                 'name.max' => 'O campo nome deve ter no máximo 40 caracteres',
                 'password.min' => 'A senha deve ter pelo menos :min caracteres.',
@@ -106,9 +107,12 @@ class AdministrativoController extends Controller
 
             $dadosUsuario = [
                 'name' => $request->input('name'),
-                'email' => $request->input('email'),
                 'role' => $request->input('role'),
             ];
+
+            if ($request->filled('email')) {
+                $dadosUsuario['email'] = $request->input('email');
+            }
 
             if ($request->filled('password')) {
                 $dadosUsuario['password'] = Hash::make($request->input('password'));
@@ -116,9 +120,6 @@ class AdministrativoController extends Controller
 
             $usuario->update($dadosUsuario);
 
-            return redirect()->route('admin.dashboard')->with('sucess', 'Usuário editado com sucesso');
-        } catch (\Throwable $th) {
-            dd($th);
-        }
+            return redirect()->route('usuario.inicio')->with('sucess', 'Usuário editado com sucesso');
     }
 }

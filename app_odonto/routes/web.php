@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdministrativoController;
 use App\Http\Controllers\ProntuarioController;
+use App\Http\Controllers\ConsultasController;
 use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\LoginController;
 
@@ -25,12 +26,12 @@ Route::get('/login', [LoginController::class, 'inicio'])->name('admin.inicio');
 Route::post('/login', [LoginController::class, 'login'])->name('admin.login');
 Route::get('/logout', [LoginController::class, 'logout'])->name('admin.logout');
 
-Route::get('/administrativo/dashboard', [AdministrativoController::class, 'dashboard'])->name('admin.dashboard');
-Route::get('/administrativo/dashboard/cadastrar', [AdministrativoController::class, 'cadastrar'])->name('admin.cadastrar');
-Route::post('/administrativo/dashboard/cadastrar/armazenar', [AdministrativoController::class, 'armazenar'])->name('admin.armazenar');
-Route::get('/administrativo/dashboard/excluir/{id}', [AdministrativoController::class, 'excluir'])->name('admin.excluir');
-Route::get('/administrativo/dashboard/editar/{id}', [AdministrativoController::class, 'editar'])->name('admin.editar');
-Route::post('/administrativo/dashboard/editar/atualizar/{id}', [AdministrativoController::class, 'atualizar'])->name('admin.atualizar');
+Route::get('/administrativo/usuario', [AdministrativoController::class, 'inicio'])->name('usuario.inicio');
+Route::get('/administrativo/usuario/cadastrar', [AdministrativoController::class, 'cadastrar'])->name('usuario.cadastrar');
+Route::post('/administrativo/usuario/cadastrar/armazenar', [AdministrativoController::class, 'armazenar'])->name('usuario.armazenar');
+Route::get('/administrativo/usuario/excluir/{id}', [AdministrativoController::class, 'excluir'])->name('usuario.excluir');
+Route::get('/administrativo/usuario/editar/{id}', [AdministrativoController::class, 'editar'])->name('usuario.editar');
+Route::post('/administrativo/usuario/editar/atualizar/{id}', [AdministrativoController::class, 'atualizar'])->name('usuario.atualizar');
 
 Route::get('/administrativo/paciente', [PacienteController::class, 'inicio'])->name('paciente.inicio');
 Route::get('/administrativo/paciente/cadastrar', [PacienteController::class, 'cadastrar'])->name('paciente.cadastrar');
@@ -42,3 +43,10 @@ Route::post('/administrativo/paciente/editar/atualizar/{id}', [PacienteControlle
 Route::get('/administrativo/prontuario', [ProntuarioController::class, 'inicio'])->name('prontuario.inicio');
 Route::get('/administrativo/prontuario/cadastrar', [ProntuarioController::class, 'cadastrar'])->name('prontuario.cadastrar');
 Route::post('/administrativo/prontuario/armazenar', [ProntuarioController::class, 'armazenar'])->name('prontuario.armazenar');
+
+Route::get('/administrativo/consulta', [ConsultasController::class, 'inicio'])->name('consulta.inicio');
+Route::get('/administrativo/consulta/marcar', [ConsultasController::class, 'marcar'])->name('consulta.marcar');
+Route::post('/administrativo/consulta/armazenar', [ConsultasController::class, 'armazenar'])->name('consulta.armazenar');
+Route::get('/administrativo/consulta/desmarcar/{id}', [ConsultasController::class, 'desmarcar'])->name('consulta.desmarcar');
+Route::get('/administrativo/consulta/remarcar/{id}', [ConsultasController::class, 'remarcar'])->name('consulta.remarcar');
+Route::post('/administrativo/consulta/remarcar/atualizar/{id}', [ConsultasController::class, 'atualizar'])->name('consulta.atualizar');

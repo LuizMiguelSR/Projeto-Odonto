@@ -15,8 +15,9 @@ class PacienteController extends Controller
     public function inicio()
     {
         try {
-            $pacientes = Paciente::all();
-            return view('admin.paciente_inicio', compact('pacientes'));
+            $paginator = Paciente::paginate(8);
+            $pacientes = $paginator;
+            return view('admin.paciente_inicio', compact('pacientes', 'paginator'));
         } catch (\Throwable $th) {
             dd($th);
         }
@@ -47,6 +48,7 @@ class PacienteController extends Controller
         ];
 
         $request->validate($regras, $feedback);
+
         try {
             $paciente = new Paciente($request->all());
             $paciente->save();
@@ -79,31 +81,35 @@ class PacienteController extends Controller
 
     public function atualizar(Request $request, $id)
     {
+
+        $paciente = Paciente::find($id);
+
+        $regras = [
+            'nome' => 'required|min:4|max:40',
+            'email' => 'unique:pacientes',
+            'telefone' => 'required|regex:/^\(\d{2}\)\d{5}-\d{4}$/',
+        ];
+
+        $feedback = [
+            'required' => 'O campo :attribute deve ser preenchido.',
+            'nome.min' => 'O campo deve ter no mínimo 4 caracteres.',
+            'nome.max' => 'O campo deve ter no máximo 40 caracteres.',
+            'email.unique' => 'Este email já está em uso. Por favor, escolha outro.',
+            'telefone.regex' => 'O telefone deve estar no formato (XX)XXXXX-XXXX.',
+        ];
+
+        $request->validate($regras, $feedback);
+
+        $dadosPaciente = [
+            'nome' => $request->input('nome'),
+            'telefone' => $request->input('telefone'),
+        ];
+
+        if ($request->filled('email')) {
+            $dadosPaciente['email'] = $request->input('email');
+        }
+
         try {
-            $paciente = Paciente::find($id);
-
-            $regras = [
-                'nome' => 'required|min:4|max:40',
-                'email' => 'required',
-                'cpf' => 'required|regex:/^\d{3}\.\d{3}\.\d{3}-\d{2}$/',
-                'telefone' => 'required|regex:/^\(\d{2}\)\d{5}-\d{4}$/',
-            ];
-
-            $feedback = [
-                'required' => 'O campo :attribute deve ser preenchido.',
-                'nome.min' => 'O campo deve ter no mínimo 4 caracteres.',
-                'nome.max' => 'O campo deve ter no máximo 40 caracteres.',
-                'telefone.regex' => 'O telefone deve estar no formato (XX)XXXXX-XXXX.',
-                'cpf.regex' => 'O CPF deve estar no formato XXX.XXX.XXX-XX.',
-            ];
-
-            $request->validate($regras, $feedback);
-            $dadosPaciente = [
-                'nome' => $request->input('nome'),
-                'email' => $request->input('email'),
-                'cpf' => $request->input('cpf'),
-                'telefone' => $request->input('telefone'),
-            ];
             $paciente->update($dadosPaciente);
             return redirect()->route('paciente.inicio')->with('sucess', 'Paciente editado com sucesso');
         } catch (\Throwable $th) {

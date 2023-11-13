@@ -1,5 +1,5 @@
 @extends('admin.layouts.layoutDashboard')
-@section('titulo', 'Cadastrar Prontuário')
+@section('titulo', 'Enviar Prontuário')
 @section('conteudo')
     <main class="col h-100 text-light p-4">
         <div class="d-flex align-items-end justify-content-between mb-4">
@@ -12,7 +12,7 @@
             @csrf
 
             <div class="mb-3 row">
-                <label for="role" class="col-sm-2 col-form-label">Nome:</label>
+                <label for="nome" class="col-sm-2 col-form-label">Nome:</label>
                 <div class="col-sm-10">
                     <select name="id" class="form-control bg-dark text-light border-dark form-select" id="id" required>
                         <option value="" disabled selected>Selecione</option>
