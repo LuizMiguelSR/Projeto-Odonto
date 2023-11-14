@@ -129,7 +129,7 @@ class ConsultasController extends Controller
             ->post($graphUrl, [
                 'messaging_product' => 'whatsapp',
                 'to' => $telefone,
-                'type' => 'template',
+                'type' => 'template', // Template usado na criação do app no meta
                 'template' => [
                     'name' => 'hello_world',
                     'language' => ['code' => 'en_US'],

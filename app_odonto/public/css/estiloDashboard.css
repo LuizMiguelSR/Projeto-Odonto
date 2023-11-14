@@ -2,7 +2,7 @@
 
 .table-dark > tbody > tr > td, .table-dark > thead > tr > th, .table-dark > tfoot > tr > td{
     background-color: #141618;
-    border-color: #FFFFFF14;
+    border-color: #ffffff14;
     padding: .5rem 1.5rem;
 }
 

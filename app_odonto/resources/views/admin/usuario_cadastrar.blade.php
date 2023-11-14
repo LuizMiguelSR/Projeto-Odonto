@@ -22,7 +22,7 @@
             <div class="mb-3 row">
                 <label for="email" class="col-sm-2 col-form-label">E-mail:</label>
                 <div class="col-sm-10">
-                    <input type="email" class="form-control bg-dark text-light border-dark" id="email" name="email" placeholder="Ex: admin@kbrtec.com.br" value="{{ old('email') }}" required>
+                    <input type="email" class="form-control bg-dark text-light border-dark" id="email" name="email" placeholder="Ex: admin@email.com.br" value="{{ old('email') }}" required>
                     {{ $errors->has('email') ? $errors->first('email') : '' }}
                 </div>
             </div>
