@@ -32,6 +32,7 @@ Route::post('/administrativo/usuario/cadastrar/armazenar', [AdministrativoContro
 Route::get('/administrativo/usuario/excluir/{id}', [AdministrativoController::class, 'excluir'])->name('usuario.excluir');
 Route::get('/administrativo/usuario/editar/{id}', [AdministrativoController::class, 'editar'])->name('usuario.editar');
 Route::post('/administrativo/usuario/editar/atualizar/{id}', [AdministrativoController::class, 'atualizar'])->name('usuario.atualizar');
+Route::any('/administrativo/usuario/filtrar', [AdministrativoController::class, 'filtrar'])->name('usuario.filtrar');
 
 Route::get('/administrativo/paciente', [PacienteController::class, 'inicio'])->name('paciente.inicio');
 Route::get('/administrativo/paciente/cadastrar', [PacienteController::class, 'cadastrar'])->name('paciente.cadastrar');
@@ -39,6 +40,7 @@ Route::post('/administrativo/paciente/cadastrar/armazenar', [PacienteController:
 Route::get('/administrativo/paciente/excluir/{id}', [PacienteController::class, 'excluir'])->name('paciente.excluir');
 Route::get('/administrativo/paciente/editar/{id}', [PacienteController::class, 'editar'])->name('paciente.editar');
 Route::post('/administrativo/paciente/editar/atualizar/{id}', [PacienteController::class, 'atualizar'])->name('paciente.atualizar');
+Route::any('/administrativo/paciente/filtrar', [PacienteController::class, 'filtrar'])->name('paciente.filtrar');
 
 Route::get('/administrativo/prontuario', [ProntuarioController::class, 'inicio'])->name('prontuario.inicio');
 Route::get('/administrativo/prontuario/cadastrar', [ProntuarioController::class, 'cadastrar'])->name('prontuario.cadastrar');

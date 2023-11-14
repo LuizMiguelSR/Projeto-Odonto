@@ -2,6 +2,15 @@
 
 Projeto de sistema de gerenciamento de consultas odontológicas, com CRUD de pacientes, consultas e prontuários. E envio de mensagens de aviso via WhatsApp.
 
+## O que foi utilizado
+
+- Paginação e filtros;
+- Banco de dados relacional;
+- Validação de dados;
+- Utilização da API do Meta para enviar mensagens via WhatsApp;
+- Autenticação de usuários;
+- Envios de emails;
+
 ## Instruções
 
 - 1º Realizar a instalação dos pacotes do composer

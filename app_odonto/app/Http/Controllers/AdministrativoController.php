@@ -122,4 +122,21 @@ class AdministrativoController extends Controller
 
             return redirect()->route('usuario.inicio')->with('sucess', 'Usuário editado com sucesso');
     }
+
+    public function filtrar(Request $request)
+    {
+        $name = $request->query('name');
+        $email = $request->query('email');
+        $role = $request->query('role');
+
+        $query = User::query()
+            ->when($name, fn ($query) => $query->where('name', 'like', '%' . $name . '%'))
+            ->when($email, fn ($query) => $query->where('email', 'like', '%' . $email . '%'))
+            ->when($role, fn ($query) => $query->where('role', $role));
+
+        $paginator = $query->paginate(8);
+        $usuarios = $paginator;
+
+        return view('admin.usuario_inicio', compact('usuarios', 'paginator'));
+    }
 }

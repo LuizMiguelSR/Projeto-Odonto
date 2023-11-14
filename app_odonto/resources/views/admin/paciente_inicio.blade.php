@@ -2,6 +2,8 @@
 @section('titulo', 'Pacientes')
 @section('conteudo')
     <div class="d-flex justify-content-between mb-4">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
         @component('admin.layouts._components.alertaSucesso')
         @endcomponent
         <h1 class="h3">Pacientes</h1>
@@ -13,38 +15,27 @@
     </div>
 
     <div class="d-flex justify-content-between align-items-end mb-3">
-        <form action="" class="bg-custom rounded col-12 py-3 px-4">
+        <form method="get" action="{{ route('paciente.filtrar') }}" class="bg-custom rounded col-12 py-3 px-4">
 
             <div class="row align-items-end row-gap-4">
-                <div class="col-3 d-flex flex-wrap">
-                    <label for="search" class="col-form-label">Buscar:</label>
+                <div class="col-4 d-flex flex-wrap">
+                    <label for="search" class="col-form-label">Buscar por nome:</label>
                     <div class="col-12">
-                        <input type="text" class="form-control bg-dark text-light border-dark" id="search" placeholder="Ex: Admin">
+                        <input name="nome" type="text" class="form-control bg-dark text-light border-dark" id="nome" placeholder="Ex: José da Silva">
+                    </div>
+                </div>
+
+                <div class="col-4 d-flex flex-wrap">
+                    <label for="search" class="col-form-label">Buscar por email:</label>
+                    <div class="col-12">
+                        <input type="email" name="email" class="form-control bg-dark text-light border-dark" id="email" placeholder="Ex: jose@email.com">
                     </div>
                 </div>
 
                 <div class="col-3 d-flex flex-wrap">
-                    <label for="status" class="col-form-label">Status:</label>
+                    <label for="search" class="col-form-label">Buscar por telefone:</label>
                     <div class="col-12">
-                        <select name="status" class="form-control bg-dark text-light border-dark form-select" id="status">
-                            <option value="" disabled selected>Selecione</option>
-                            <option value="ativado">Ativado</option>
-                            <option value="desativado">Desativado</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="col-5 row">
-                    <div class="col-12 col-form-label">Data:</div>
-
-                    <div class="col-6 d-flex gap-2">
-                        <label for="de" class="col-form-label">De:</label>
-                        <input type="text" class="form-control bg-dark text-light border-dark" id="de" placeholder="27/10/2023">
-                    </div>
-
-                    <div class="col-6 d-flex gap-2">
-                        <label for="ate" class="col-form-label">Até:</label>
-                        <input type="text" class="form-control bg-dark text-light border-dark" id="ate" placeholder="27/10/2023">
+                        <input type="text" name="telefone" class="form-control bg-dark text-light border-dark" id="telefone" placeholder="Ex: (XX)XXXXX-XXXX">
                     </div>
                 </div>
 
@@ -137,4 +128,9 @@
 
     {{ $paginator->links('admin.layouts._components.paginator') }}
 
+    <script>
+        $(document).ready(function() {
+            $('#telefone').mask('(00)00000-0000');
+        });
+    </script>
 @endsection

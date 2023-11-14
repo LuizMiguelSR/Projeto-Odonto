@@ -116,4 +116,21 @@ class PacienteController extends Controller
             dd($th);
         }
     }
+
+    public function filtrar(Request $request)
+    {
+        $nome = $request->query('nome');
+        $email = $request->query('email');
+        $telefone = $request->query('telefone');
+
+        $query = Paciente::query()
+            ->when($nome, fn ($query) => $query->where('nome', 'like', '%' . $nome . '%'))
+            ->when($email, fn ($query) => $query->where('email', 'like', '%' . $email . '%'))
+            ->when($telefone, fn ($query) => $query->where('telefone', 'like', '%' . $telefone));
+
+        $paginator = $query->paginate(8);
+        $pacientes = $paginator;
+
+        return view('admin.paciente_inicio', compact('pacientes', 'paginator'));
+    }
 }

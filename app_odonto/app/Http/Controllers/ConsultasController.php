@@ -14,7 +14,6 @@ class ConsultasController extends Controller
         $this->middleware('auth');
     }
 
-
     public function inicio()
     {
         try {
@@ -129,9 +128,9 @@ class ConsultasController extends Controller
             ->post($graphUrl, [
                 'messaging_product' => 'whatsapp',
                 'to' => $telefone,
-                'type' => 'template', // Template usado na criação do app no meta
+                'type' => 'template', // Template usado na criação do app no Meta
                 'template' => [
-                    'name' => 'hello_world',
+                    'name' => 'hello_world', // Modelo definido no Meta
                     'language' => ['code' => 'en_US'],
                 ],
             ]);
