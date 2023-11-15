@@ -136,4 +136,33 @@ class ConsultasController extends Controller
             ]);
 
     }
+
+    public function filtrar(Request $request)
+    {
+        $nome = $request->query('nome');
+        $descricao = $request->query('descricao');
+        $dataInicio = $request->query('data_inicio');
+        $dataFim = $request->query('data_fim');
+
+        $query = Consulta::query()
+            ->when($nome, function ($query) use ($nome) {
+                $query->whereHas('paciente', function ($subQuery) use ($nome) {
+                    $subQuery->where('nome', 'like', '%' . $nome . '%');
+                });
+            })
+            ->when($descricao, fn ($query) => $query->where('descricao', 'like', '%' . $descricao . '%'))
+            ->when($dataInicio, function ($query) use ($dataInicio, $dataFim) {
+                $dataInicio = date('Y-m-d H:i:s', strtotime($dataInicio));
+                $query->where('created_at', '>=', $dataInicio);
+            })
+            ->when($dataFim, function ($query) use ($dataInicio, $dataFim) {
+                $dataFim = date('Y-m-d H:i:s', strtotime($dataFim));
+                $query->where('created_at', '<=', $dataFim);
+            });
+
+        $paginator = $query->paginate(8);
+        $consultas = $paginator;
+
+        return view('admin.consulta_inicio', compact('consultas', 'paginator'));
+    }
 }

@@ -12,24 +12,20 @@
     </div>
 
     <div class="d-flex justify-content-between align-items-end mb-3">
-        <form action="" class="bg-custom rounded col-12 py-3 px-4">
+        <form method="get" action="{{ route('consulta.filtrar') }}" class="bg-custom rounded col-12 py-3 px-4">
 
             <div class="row align-items-end row-gap-4">
                 <div class="col-3 d-flex flex-wrap">
-                    <label for="search" class="col-form-label">Buscar:</label>
+                    <label for="search" class="col-form-label">Buscar por nome:</label>
                     <div class="col-12">
-                        <input type="text" class="form-control bg-dark text-light border-dark" id="search" placeholder="Ex: Admin">
+                        <input type="text" name="nome" class="form-control bg-dark text-light border-dark" id="search" placeholder="Ex: José da Silva">
                     </div>
                 </div>
 
                 <div class="col-3 d-flex flex-wrap">
-                    <label for="status" class="col-form-label">Status:</label>
+                    <label for="search" class="col-form-label">Buscar por descrição:</label>
                     <div class="col-12">
-                        <select name="status" class="form-control bg-dark text-light border-dark form-select" id="status">
-                            <option value="" disabled selected>Selecione</option>
-                            <option value="ativado">Ativado</option>
-                            <option value="desativado">Desativado</option>
-                        </select>
+                        <input type="text" name="descricao" class="form-control bg-dark text-light border-dark" id="search" placeholder="Ex: Tratamento de canal">
                     </div>
                 </div>
 
@@ -38,12 +34,12 @@
 
                     <div class="col-6 d-flex gap-2">
                         <label for="de" class="col-form-label">De:</label>
-                        <input type="text" class="form-control bg-dark text-light border-dark" id="de" placeholder="27/10/2023">
+                        <input type="datetime-local" name="data_inicio" class="form-control bg-dark text-light border-dark" id="de">
                     </div>
 
                     <div class="col-6 d-flex gap-2">
                         <label for="ate" class="col-form-label">Até:</label>
-                        <input type="text" class="form-control bg-dark text-light border-dark" id="ate" placeholder="27/10/2023">
+                        <input type="datetime-local" name="data_fim" class="form-control bg-dark text-light border-dark" id="ate">
                     </div>
                 </div>
 

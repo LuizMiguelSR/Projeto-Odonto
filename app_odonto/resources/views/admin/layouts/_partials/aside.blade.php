@@ -76,11 +76,15 @@
                             @endif
                         </small>
                     </a>
-                    <a href="{{ route('prontuario.inicio') }}" class="submenu-link link-light text-decoration-none rounded p-2 {{ request()->routeIs('prontuario.inicio') ? ' active' : '' }}">
+                    @if (request()->routeIs('prontuario.inicio') || request()->routeIs('prontuario.filtrar'))
+                        <a href="{{ route('prontuario.inicio') }}" class="submenu-link link-light text-decoration-none rounded p-2 active">
+                    @else
+                        <a href="{{ route('prontuario.inicio') }}" class="submenu-link link-light text-decoration-none rounded p-2">
+                    @endif
                         <small class="d-flex justify-content-between align-items-center">
                             Prontuários
 
-                            @if (request()->routeIs('prontuario.inicio'))
+                            @if (request()->routeIs('prontuario.inicio') || request()->route('prontuario.filtrar'))
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
                                 </svg>
@@ -112,11 +116,15 @@
                             @endif
                         </small>
                     </a>
-                    <a href="{{ route('consulta.inicio') }}" class="submenu-link link-light text-decoration-none rounded p-2 {{ request()->routeIs('consulta.inicio') ? ' active' : '' }}">
+                    @if (request()->routeIs('consulta.inicio') || request()->routeIs('consulta.filtrar'))
+                        <a href="{{ route('consulta.inicio') }}" class="submenu-link link-light text-decoration-none rounded p-2 active">
+                    @else
+                        <a href="{{ route('consulta.inicio') }}" class="submenu-link link-light text-decoration-none rounded p-2">
+                    @endif
                         <small class="d-flex justify-content-between align-items-center">
                             Listagem de Consultas
 
-                            @if (request()->routeIs('consulta.inicio'))
+                            @if (request()->routeIs('consulta.inicio') || request()->routeIs('consulta.filtrar'))
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
                                 </svg>

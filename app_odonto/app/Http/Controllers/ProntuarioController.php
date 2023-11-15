@@ -47,4 +47,31 @@ class ProntuarioController extends Controller
 
         return redirect()->route('prontuario.inicio')->with('sucess', 'Prontuário enviado com sucesso!');
     }
+
+    public function filtrar(Request $request)
+    {
+        $nome = $request->query('nome');
+        $dataInicio = $request->query('data_inicio');
+        $dataFim = $request->query('data_fim');
+
+        $query = Prontuario::query()
+            ->when($nome, function ($query) use ($nome) {
+                $query->whereHas('paciente', function ($subQuery) use ($nome) {
+                    $subQuery->where('nome', 'like', '%' . $nome . '%');
+                });
+            })
+            ->when($dataInicio, function ($query) use ($dataInicio, $dataFim) {
+                $dataInicio = date('Y-m-d H:i:s', strtotime($dataInicio));
+                $query->where('created_at', '>=', $dataInicio);
+            })
+            ->when($dataFim, function ($query) use ($dataInicio, $dataFim) {
+                $dataFim = date('Y-m-d H:i:s', strtotime($dataFim . ' 23:59:59'));
+                $query->where('created_at', '<=', $dataFim);
+            });
+
+        $paginator = $query->paginate(8);
+        $prontuarios = $paginator;
+
+        return view('admin.prontuario_inicio', compact('prontuarios', 'paginator'));
+    }
 }

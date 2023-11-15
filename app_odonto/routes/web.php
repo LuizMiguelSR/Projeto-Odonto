@@ -45,6 +45,7 @@ Route::any('/administrativo/paciente/filtrar', [PacienteController::class, 'filt
 Route::get('/administrativo/prontuario', [ProntuarioController::class, 'inicio'])->name('prontuario.inicio');
 Route::get('/administrativo/prontuario/cadastrar', [ProntuarioController::class, 'cadastrar'])->name('prontuario.cadastrar');
 Route::post('/administrativo/prontuario/armazenar', [ProntuarioController::class, 'armazenar'])->name('prontuario.armazenar');
+Route::any('/administrativo/prontuario/filtrar', [ProntuarioController::class, 'filtrar'])->name('prontuario.filtrar');
 
 Route::get('/administrativo/consulta', [ConsultasController::class, 'inicio'])->name('consulta.inicio');
 Route::get('/administrativo/consulta/marcar', [ConsultasController::class, 'marcar'])->name('consulta.marcar');
@@ -52,3 +53,4 @@ Route::post('/administrativo/consulta/armazenar', [ConsultasController::class, '
 Route::get('/administrativo/consulta/desmarcar/{id}', [ConsultasController::class, 'desmarcar'])->name('consulta.desmarcar');
 Route::get('/administrativo/consulta/remarcar/{id}', [ConsultasController::class, 'remarcar'])->name('consulta.remarcar');
 Route::post('/administrativo/consulta/remarcar/atualizar/{id}', [ConsultasController::class, 'atualizar'])->name('consulta.atualizar');
+Route::any('/administrativo/consulta/filtrar', [ConsultasController::class, 'filtrar'])->name('consulta.filtrar');
