@@ -32,8 +32,17 @@
                             <div class="col-12">
                                 <button type="submit" class="btn btn-light mt-3">Entrar</button>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                        <form method="get" action="{{ route('admin.login_google') }}" class="form w-100">
+                            @csrf
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-light mt-3" style="background-color: #4285F4; color: white; border: none; padding: 10px; border-radius: 5px;">
+                                    <img src="{{ asset('imgs/google.jpg') }}" alt="Ícone do Google" style="width: 30px; height: 30px; margin-right: 10px;">
+                                    Entrar com Google
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

@@ -7,6 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Models\User;
+use Socialite;
 
 class LoginController extends Controller
 {
@@ -63,5 +64,28 @@ class LoginController extends Controller
         $request->session()->regenerateToken();
 
         return redirect()->route('admin.inicio');
+    }
+
+    public function redirectToGoogle()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function handleGoogleCallback()
+    {
+        try {
+            $user = Socialite::driver('google')->user();
+
+            $authUser = User::where('email', $user->email)->first();
+
+            if ($authUser) {
+                Auth::login($authUser, true);
+                return redirect()->intended('administrativo/usuario');
+            } else {
+                return redirect('/')->with('error', 'Usuário não autorizado.');
+            }
+        } catch (\Exception $e) {
+            return redirect('/')->with('error', 'Ocorreu um erro durante a autenticação.');
+        }
     }
 }

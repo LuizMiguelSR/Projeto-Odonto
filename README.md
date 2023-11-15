@@ -9,6 +9,7 @@ Projeto de sistema de gerenciamento de consultas odontológicas, com CRUD de pac
 - Validação de dados;
 - Utilização da API do Meta para enviar mensagens via WhatsApp;
 - Autenticação de usuários;
+- Autenticação de usuários com o Google;
 - Envios de emails;
 
 ## Instruções

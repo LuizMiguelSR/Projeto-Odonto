@@ -25,6 +25,8 @@ Route::get('/', function () {
 Route::get('/login', [LoginController::class, 'inicio'])->name('admin.inicio');
 Route::post('/login', [LoginController::class, 'login'])->name('admin.login');
 Route::get('/logout', [LoginController::class, 'logout'])->name('admin.logout');
+Route::get('/login/auth/google', [LoginController::class, 'redirectToGoogle'])->name('admin.login_google');
+Route::get('/login/auth/google/callback', [LoginController::class, 'handleGoogleCallback'])->name('admin.login_google_callback');
 
 Route::get('/administrativo/usuario', [AdministrativoController::class, 'inicio'])->name('usuario.inicio');
 Route::get('/administrativo/usuario/cadastrar', [AdministrativoController::class, 'cadastrar'])->name('usuario.cadastrar');
