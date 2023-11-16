@@ -26,7 +26,7 @@
                                 <label for="password">Senha:</label>
                                 <input type="password" class="form-control bg-dark border-dark text-light" id="password" name="password" required autocomplete="current-password">
                                 {{ $errors->has('password') ? $errors->first('password') : '' }}
-                                <a href="recuperar-senha.html" class="link-light"><small>Esqueci minha senha</small></a>
+                                <a href="{{ route('password.request') }}" class="link-light"><small>Esqueci minha senha</small></a>
                             </div>
 
                             <div class="col-12">
@@ -36,7 +36,7 @@
                         <form method="get" action="{{ route('admin.login_google') }}" class="form w-100">
                             @csrf
                             <div class="col-12">
-                                <button type="submit" class="btn btn-light mt-3" style="background-color: #4285F4; color: white; border: none; padding: 10px; border-radius: 5px;">
+                                <button type="submit" class="btn btn-light mt-1" style="background-color: #4285F4; color: white; border: none; padding: 10px; border-radius: 5px;">
                                     <img src="{{ asset('imgs/google.jpg') }}" alt="Ícone do Google" style="width: 30px; height: 30px; margin-right: 10px;">
                                     Entrar com Google
                                 </button>

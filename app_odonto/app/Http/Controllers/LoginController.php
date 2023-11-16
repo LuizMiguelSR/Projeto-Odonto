@@ -82,10 +82,10 @@ class LoginController extends Controller
                 Auth::login($authUser, true);
                 return redirect()->intended('administrativo/usuario');
             } else {
-                return redirect('/')->with('error', 'Usuário não autorizado.');
+                return redirect()->route('admin.inicio')->with('error', 'Usuário não autorizado.');
             }
         } catch (\Exception $e) {
-            return redirect('/')->with('error', 'Ocorreu um erro durante a autenticação.');
+            return redirect()->route('admin.inicio')->with('error', 'Ocorreu um erro durante a autenticação.');
         }
     }
 }

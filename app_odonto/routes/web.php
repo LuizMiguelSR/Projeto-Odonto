@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdministrativoController;
+use App\Http\Controllers\EsqueciSenhaController;
 use App\Http\Controllers\ProntuarioController;
 use App\Http\Controllers\ConsultasController;
 use App\Http\Controllers\PacienteController;
@@ -27,6 +28,11 @@ Route::post('/login', [LoginController::class, 'login'])->name('admin.login');
 Route::get('/logout', [LoginController::class, 'logout'])->name('admin.logout');
 Route::get('/login/auth/google', [LoginController::class, 'redirectToGoogle'])->name('admin.login_google');
 Route::get('/login/auth/google/callback', [LoginController::class, 'handleGoogleCallback'])->name('admin.login_google_callback');
+
+Route::get('/password/reset', [EsqueciSenhaController::class, 'inicio'])->name('password.request');
+Route::post('/password/email', [EsqueciSenhaController::class, 'enviarSenhaEmail'])->name('password.email');
+Route::get('/password/email/{token}', [EsqueciSenhaController::class, 'senhaResetLink'])->name('password.reset');
+Route::post('/password/update', [EsqueciSenhaController::class, 'senhaUpdate'])->name('password.update');
 
 Route::get('/administrativo/usuario', [AdministrativoController::class, 'inicio'])->name('usuario.inicio');
 Route::get('/administrativo/usuario/cadastrar', [AdministrativoController::class, 'cadastrar'])->name('usuario.cadastrar');
