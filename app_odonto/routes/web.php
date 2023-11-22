@@ -23,7 +23,7 @@ Route::get('/', function () {
     return redirect()->route('admin.inicio');
 });
 
-Route::get('/login', [LoginController::class, 'inicio'])->name('admin.inicio');
+Route::get('/home', [LoginController::class, 'inicio'])->name('admin.inicio');
 Route::post('/login', [LoginController::class, 'login'])->name('admin.login');
 Route::get('/logout', [LoginController::class, 'logout'])->name('admin.logout');
 Route::get('/login/auth/google', [LoginController::class, 'redirectToGoogle'])->name('admin.login_google');
