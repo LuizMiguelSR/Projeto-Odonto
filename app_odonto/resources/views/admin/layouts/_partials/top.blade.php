@@ -16,9 +16,6 @@
 
                 <ul class="dropdown-menu">
                     <li>
-                        <a class="dropdown-item text-end" href="#">
-                            <small>Alterar Senha</small>
-                        </a>
                         <a class="dropdown-item text-end" href="{{ route('admin.logout') }}">
                             <small>Sair</small>
                         </a>

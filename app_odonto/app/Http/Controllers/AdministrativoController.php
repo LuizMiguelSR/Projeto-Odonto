@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
 class AdministrativoController extends Controller
@@ -26,6 +27,9 @@ class AdministrativoController extends Controller
 
     public function cadastrar()
     {
+        if (Auth::user()->role === 'user') {
+            return redirect()->route('usuario.inicio')->with('sucess', 'O usuário não possui permissões para criação de novos usuários');
+        }
         return view('admin.usuario_cadastrar');
     }
 
@@ -67,8 +71,14 @@ class AdministrativoController extends Controller
     {
         try {
             $usuario = User::find($id);
-            $usuario->delete();
-            return redirect()->route('usuario.inicio')->with('sucess', 'Usuário removido com sucesso');
+            if (Auth::user()->role === 'user') {
+                return redirect()->route('usuario.inicio')->with('sucess', 'O usuário não possui permissões para excluir de novos usuários');
+            } elseif($usuario->name === 'Administrador') {
+                return redirect()->route('usuario.inicio')->with('sucess', 'Este administrador não pode ser excluído');
+            } else {
+                $usuario->delete();
+                return redirect()->route('usuario.inicio')->with('sucess', 'Usuário removido com sucesso');
+            }
         } catch (\Throwable $th) {
             dd($th);
         }
@@ -79,7 +89,13 @@ class AdministrativoController extends Controller
     {
         try {
             $usuario = User::find($id);
-            return view('admin.usuario_editar', compact('usuario'));
+            if (Auth::user()->role === 'user') {
+                return redirect()->route('usuario.inicio')->with('sucess', 'O usuário não possui permissões para edição de usuários');
+            } elseif($usuario->name === 'Administrador') {
+                return redirect()->route('usuario.inicio')->with('sucess', 'Este administrador não pode ser editado');
+            } else {
+                return view('admin.usuario_editar', compact('usuario'));
+            }
         } catch (\Throwable $th) {
             dd($th);
         }
@@ -89,38 +105,44 @@ class AdministrativoController extends Controller
     {
             $usuario = User::find($id);
 
-            $regras = [
-                'name' => 'min:4|max:40',
-                'email' => 'unique:users',
-                'password' => 'nullable|min:4',
-                'role' => 'in:admin,user',
-            ];
+            if (Auth::user()->role === 'user') {
+                return redirect()->route('usuario.inicio')->with('sucess', 'O usuário não possui permissões para edição de usuários');
+            } elseif($usuario->name === 'Administrador') {
+                return redirect()->route('usuario.inicio')->with('sucess', 'Este administrador não pode ser editado');
+            } else {
+                $regras = [
+                    'name' => 'min:4|max:40',
+                    'email' => 'unique:users',
+                    'password' => 'nullable|min:4',
+                    'role' => 'in:admin,user',
+                ];
 
-            $feedback = [
-                'email.unique' => 'Este email já está em uso. Por favor, escolha outro.',
-                'name.min' => 'O campo nome deve ter no mínimo 4 caracteres',
-                'name.max' => 'O campo nome deve ter no máximo 40 caracteres',
-                'password.min' => 'A senha deve ter pelo menos :min caracteres.',
-            ];
+                $feedback = [
+                    'email.unique' => 'Este email já está em uso. Por favor, escolha outro.',
+                    'name.min' => 'O campo nome deve ter no mínimo 4 caracteres',
+                    'name.max' => 'O campo nome deve ter no máximo 40 caracteres',
+                    'password.min' => 'A senha deve ter pelo menos :min caracteres.',
+                ];
 
-            $request->validate($regras, $feedback);
+                $request->validate($regras, $feedback);
 
-            $dadosUsuario = [
-                'name' => $request->input('name'),
-                'role' => $request->input('role'),
-            ];
+                $dadosUsuario = [
+                    'name' => $request->input('name'),
+                    'role' => $request->input('role'),
+                ];
 
-            if ($request->filled('email')) {
-                $dadosUsuario['email'] = $request->input('email');
+                if ($request->filled('email')) {
+                    $dadosUsuario['email'] = $request->input('email');
+                }
+
+                if ($request->filled('password')) {
+                    $dadosUsuario['password'] = Hash::make($request->input('password'));
+                }
+
+                $usuario->update($dadosUsuario);
+
+                return redirect()->route('usuario.inicio')->with('sucess', 'Usuário editado com sucesso');
             }
-
-            if ($request->filled('password')) {
-                $dadosUsuario['password'] = Hash::make($request->input('password'));
-            }
-
-            $usuario->update($dadosUsuario);
-
-            return redirect()->route('usuario.inicio')->with('sucess', 'Usuário editado com sucesso');
     }
 
     public function filtrar(Request $request)
