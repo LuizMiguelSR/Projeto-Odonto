@@ -2,6 +2,14 @@
 
 Projeto de sistema de gerenciamento de consultas odontológicas, com CRUD de pacientes, consultas e prontuários. E envio de mensagens de aviso via WhatsApp.
 
+Demonstração do projeto Link: http://odontoteste.duckdns.org/
+
+Usuário: admin@email.com
+
+Senha: 1234
+
+Link: http://odontoteste.duckdns.org/
+
 ## O que foi utilizado
 
 - Paginação e filtros;
