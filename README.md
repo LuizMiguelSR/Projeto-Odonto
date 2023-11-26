@@ -8,8 +8,6 @@ Usuário: admin@email.com
 
 Senha: 1234
 
-Link: http://odontoteste.duckdns.org/
-
 ## O que foi utilizado
 
 - Paginação e filtros;
