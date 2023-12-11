@@ -3,7 +3,7 @@
 Projeto de sistema de gerenciamento de consultas odontológicas, com CRUD de pacientes, consultas e prontuários. E envio de mensagens de aviso via WhatsApp.
 
 Demonstração do projeto Link:
-<a href="http://odontoteste.duckdns.org/" target="_blank">http://odontoteste.duckdns.org/</a>
+<a href="http://testelaravel11.azurewebsites.net/" target="_blank">http://testelaravel11.azurewebsites.net/</a>
 
 Usuário: admin@email.com
 
@@ -12,12 +12,14 @@ Senha: 1234
 ## O que foi utilizado
 
 - Paginação e filtros;
+- Inclusão de prontuários em PDF;
 - Banco de dados relacional;
 - Validação de dados;
 - Utilização da API do Meta para enviar mensagens via WhatsApp;
 - Autenticação de usuários;
 - Autenticação de usuários com o Google;
 - Envios de emails;
+- Plataforma de Produção utilizada na demonstração: Microsoft Azure;
 
 ## Instruções
 
