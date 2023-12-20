@@ -37,7 +37,7 @@ class LoginController extends Controller
             if (Auth::attempt($credenciais)) {
                 $request->session()->regenerate();
 
-                return redirect()->intended('administrativo/usuario');
+                return redirect()->intended('/usuario');
 
             }
 
@@ -80,7 +80,7 @@ class LoginController extends Controller
 
             if ($authUser) {
                 Auth::login($authUser, true);
-                return redirect()->intended('administrativo/usuario');
+                return redirect()->intended('/usuario');
             } else {
                 return redirect()->route('admin.inicio')->with('error', 'Usuário não autorizado.');
             }

@@ -51,10 +51,10 @@ class ConsultasController extends Controller
         $request->validate($regras, $feedback);
         try {
             $consulta = new Consulta($request->all());
-            $mensagem = 'Olá '. $consulta->paciente->nome . ', não se esqueça de sua consulta ás ' . date('H:i', strtotime($consulta->data_consulta));
+            /* $mensagem = 'Olá '. $consulta->paciente->nome . ', não se esqueça de sua consulta ás ' . date('H:i', strtotime($consulta->data_consulta));
             $telefone = $consulta->paciente->telefone;
 
-            $this->enviarMensagem($telefone, $mensagem);
+            $this->enviarMensagem($telefone, $mensagem); */
 
             $consulta->save();
             return redirect()->route('consulta.inicio')->with('sucess', 'Consulta marcada com sucesso!');
@@ -106,10 +106,10 @@ class ConsultasController extends Controller
                 'descricao' => $request->input('descricao'),
             ];
             $consulta->update($dadosConsulta);
-            $mensagem = 'Olá '. $consulta->paciente->nome . ', sua consulta foi remarcada para às' . date('H:i', strtotime($consulta->data_consulta));
+            /* $mensagem = 'Olá '. $consulta->paciente->nome . ', sua consulta foi remarcada para às' . date('H:i', strtotime($consulta->data_consulta));
             $telefone = $consulta->paciente->telefone;
 
-            $this->enviarMensagem($telefone, $mensagem);
+            $this->enviarMensagem($telefone, $mensagem); */
             return redirect()->route('consulta.inicio')->with('sucess', 'Consulta remarcada com sucesso');
         } catch (\Throwable $th) {
             dd($th);
