@@ -20,10 +20,14 @@ class EsqueciSenhaController extends Controller
         $status = Password::broker('users')->sendResetLink(
             $request->only('email')
         );
+
         $email = $request->email;
-        return $status === Password::RESET_LINK_SENT
-            ? view('admin.email_reset', compact('email'))
-            : back()->withErrors(['email' => __($status)])->dump();
+
+        if ($status === Password::RESET_LINK_SENT) {
+            return view('admin.email_reset', compact('email'));
+        } else {
+            return back()->withErrors(['email' => __($status)]);
+        }
     }
 
     public function senhaResetLink(Request $request, $token = null)
