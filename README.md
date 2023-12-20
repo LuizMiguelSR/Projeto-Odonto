@@ -2,13 +2,6 @@
 
 Projeto de sistema de gerenciamento de consultas odontológicas, com CRUD de pacientes, consultas e prontuários. E envio de mensagens de aviso via WhatsApp.
 
-Demonstração do projeto Link:
-<a href="http://testelaravel11.azurewebsites.net/" target="_blank">http://testelaravel11.azurewebsites.net/</a>
-
-Usuário: admin@email.com
-
-Senha: 1234
-
 ## O que foi utilizado
 
 - Paginação e filtros;
