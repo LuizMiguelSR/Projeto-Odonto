@@ -8,20 +8,17 @@ use App\Models\Paciente;
 
 class ProntuarioController extends Controller
 {
-    public function __construct()
+    public function __construct(Prontuario $prontuario)
     {
         $this->middleware('auth');
+        $this->prontuario = $prontuario;
     }
 
     public function inicio()
     {
-        try {
-            $paginator = Prontuario::paginate(8);
-            $prontuarios = $paginator;
-            return view('admin.prontuario_inicio', compact('prontuarios', 'paginator'));
-        } catch (\Throwable $th) {
-            dd($th);
-        }
+        $paginator = Prontuario::paginate(8);
+        $prontuarios = $paginator;
+        return view('admin.prontuario_inicio', compact('prontuarios', 'paginator'));
     }
 
     public function cadastrar()
@@ -33,9 +30,7 @@ class ProntuarioController extends Controller
     public function armazenar(Request $request)
     {
 
-        $request->validate([
-            'pdf_file' => 'required|mimes:pdf|max:5120',
-        ]);
+        $request->validate($this->prontuario->rules(), $this->prontuario->feedback());
 
         $pdfFile = $request->file('pdf_file');
         $fileName = 'pdf_' . uniqid() . '.' . $pdfFile->getClientOriginalExtension();

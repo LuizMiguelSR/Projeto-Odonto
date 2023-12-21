@@ -24,8 +24,16 @@
             <div class="mb-3 row">
                 <label for="email" class="col-sm-2 col-form-label">E-mail:</label>
                 <div class="col-sm-10">
-                    <input type="email" class="form-control bg-dark text-light border-dark" id="email" name="email" placeholder="Ex: admin@email.com.br">
+                    <input type="email" class="form-control bg-dark text-light border-dark" id="email" name="email" placeholder="Ex: admin@email.com.br" value="{{ $paciente->email }}">
                     {{ $errors->has('email') ? $errors->first('email') : '' }}
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <label for="cpf" class="col-sm-2 col-form-label">CPF:</label>
+                <div class="col-sm-10">
+                    <input type="cpf" class="form-control bg-dark text-light border-dark" id="cpf" name="cpf" placeholder="Ex: XXX.XXX.XXX-XX" value="{{ $paciente->cpf }}">
+                    {{ $errors->has('cpf') ? $errors->first('cpf') : '' }}
                 </div>
             </div>
 

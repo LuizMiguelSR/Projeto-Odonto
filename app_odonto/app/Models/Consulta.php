@@ -17,6 +17,21 @@ class Consulta extends Model
         'status',
     ];
 
+    public function rules()
+    {
+        return [
+            'data_consulta' => 'required',
+            'descricao' => 'required',
+        ];
+    }
+
+    public function feedback()
+    {
+        return [
+            'required' => 'O campo :attribute é requerido.',
+        ];
+    }
+
     public function paciente()
     {
         return $this->belongsTo(Paciente::class, 'paciente_id');

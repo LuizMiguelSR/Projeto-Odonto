@@ -27,6 +27,7 @@
                 <label for="formFile" class="col-sm-2 col-form-label">Prontuário em PDF até 5mb</label>
                 <div class="col-sm-10">
                     <input class="form-control bg-dark text-light border-dark" type="file" id="formFile" name="pdf_file" accept=".pdf" required>
+                    {{ $errors->has('pdf_file') ? $errors->first('pdf_file') : '' }}
                 </div>
             </div>
 
